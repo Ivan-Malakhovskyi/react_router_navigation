@@ -1,5 +1,9 @@
 # TASKS
 
+# JSON SERVER
+
+https://my-json-server.typicode.com/Ivan-Malakhovskyi/react_router_navigation
+
 1. Update routing - add enclosed(вкладений) route
 
 - example /info

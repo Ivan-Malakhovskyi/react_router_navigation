@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
-import { Link, useRouteMatch } from "react-router";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router";
 import * as bookShelfAPI from "../services/bookshelf-api";
 import PageHeading from "../components/PageHeading/PageHeading";
+import { useFetchWithAbort } from "../hooks/useFetchWithAbort";
 
 export default function BooksView() {
-  const { url } = useRouteMatch();
   const [books, setBooks] = useState([]);
+  const controller = useRef(null);
 
   useEffect(() => {
     bookShelfAPI.fetchBooks().then(setBooks);
@@ -15,14 +16,16 @@ export default function BooksView() {
     <>
       <PageHeading text="Книги" />
 
-      {books && (
+      {books.length > 0 ? (
         <ul>
           {books.map((book) => (
             <li key={book.id}>
-              <Link to={`${url}/${book.id}`}>{book.title}</Link>
+              <Link to={`/books/${book.id}`}>{book.title}</Link>
             </li>
           ))}
         </ul>
+      ) : (
+        <p>Oopps something was wrong</p>
       )}
     </>
   );

@@ -5,34 +5,37 @@ export default function Navigation() {
   return (
     <nav>
       <NavLink
-        exact
         to="/"
-        className={styles.link}
-        activeClassName={styles.activeLink}
+        className={({ isActive }) =>
+          isActive ? `${styles.activeLink}` : `${styles.link}`
+        }
       >
         Головна
       </NavLink>
 
       <NavLink
         to="/authors"
-        className={styles.link}
-        activeClassName={styles.activeLink}
+        className={({ isActive }) =>
+          isActive ? `${styles.activeLink}` : `${styles.link}`
+        }
       >
         Автори
       </NavLink>
 
       <NavLink
         to="/books"
-        className={styles.link}
-        activeClassName={styles.activeLink}
+        className={({ isActive }) =>
+          isActive ? `${styles.activeLink}` : `${styles.link}`
+        }
       >
         Книги
       </NavLink>
 
       <NavLink
         to="/table"
-        className={styles.link}
-        activeClassName={styles.activeLink}
+        className={({ isActive }) =>
+          isActive ? `${styles.activeLink}` : `${styles.link}`
+        }
       >
         Таблиця
       </NavLink>

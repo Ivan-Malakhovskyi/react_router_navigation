@@ -1,9 +1,9 @@
-import PageHeading from '../components/PageHeading/PageHeading';
+import PageHeading from "../components/PageHeading/PageHeading";
 
 export default function HomeView() {
   return (
     <>
-      <PageHeading text="Добро пожаловать" />
+      <PageHeading text="Вітаємо" />
 
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex vel velit

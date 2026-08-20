@@ -1,26 +1,20 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Outlet, Route, Routes } from "react-router";
 import AppBar from "./components/AppBar/AppBar";
 import Container from "./components/Container/Container";
 import * as bookShelfAPI from "./services/bookshelf-api";
-// import HomeView from './views/HomeView';
-// import AuthorsView from './views/AuthorsView';
-// import BooksView from './views/BooksView';
-// import BookDetailsView from './views/BookDetailsView';
-// import NotFoundView from './views/NotFoundView';
-// import TableView from './views/TableView';
 
-const HomeView = lazy(() => import("./views/HomeView"));
-const AuthorsView = lazy(
-  () => import("./views/AuthorsView" /* webpackChunkName: "authors-view" */),
+const HomePage = lazy(() => import("./pages/HomeView"));
+const AuthorsPage = lazy(
+  () => import("./pages/AuthorsView" /* webpackChunkName: "authors-view" */),
 );
 const AuthorSubView = lazy(
-  () => import("./views/AuthorSubView" /* webpackChunkName: "authors-view" */),
+  () => import("./pages/AuthorSubView" /* webpackChunkName: "authors-view" */),
 );
-const BooksView = lazy(() => import("./views/BooksView"));
-const BookDetailsView = lazy(() => import("./views/BookDetailsView"));
-const NotFoundView = lazy(() => import("./views/NotFoundView"));
-const TableView = lazy(() => import("./views/TableView"));
+const BooksView = lazy(() => import("./pages/BooksView"));
+const BookDetailsView = lazy(() => import("./pages/BookDetailsView"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundView"));
+const TablePage = lazy(() => import("./pages/TableView"));
 
 export default function App() {
   const [authors, setAuthors] = useState([]);
@@ -30,31 +24,44 @@ export default function App() {
   }, []);
 
   //! crypto.randomUUID() заміняє nanoid()
+
   return (
     <Container>
       <AppBar />
 
       <Suspense fallback={<h1>Завантажуємось...</h1>}>
-        <Routes>
-          <Route path="/" exact element={<HomeView />} />
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
 
-          <Route path="authors" element={<AuthorsView />}>
+            <Route path="authors" element={<AuthorsPage authors={authors} />} />
+
             <Route
-              path={`:authorId`}
+              path={`/authors/:id`}
               element={<AuthorSubView authors={authors} />}
             />
-          </Route>
 
-          <Route path="books" exact element={<BooksView />} />
+            <Route path="books" element={<BooksView />} />
 
-          <Route path="books/:bookId" element={<BookDetailsView />} />
+            <Route
+              path="books/:bookId"
+              element={<BookDetailsView authors={authors} />}
+            />
 
-          <Route path="table" element={<TableView />} />
+            <Route path="table" element={<TablePage />}>
+              <Route
+                path="info"
+                element={
+                  <div>
+                    <h2>Info</h2>
+                  </div>
+                }
+              />
+            </Route>
 
-          <Route path="*" element={<NotFoundView />} />
-        </Routes>
-
-        <Outlet />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
       </Suspense>
     </Container>
   );

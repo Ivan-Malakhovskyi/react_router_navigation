@@ -9,7 +9,7 @@ import {
   useResolvedPath,
 } from "react-router";
 import * as bookShelfAPI from "../services/bookshelf-api.js";
-import PageHeading from "../components/PageHeading/PageHeading";
+import PageHeading from "../components/PageHeading";
 // import AuthorSubView from './AuthorSubView';
 
 const AuthorSubView = lazy(() => import("./AuthorSubView.jsx"));

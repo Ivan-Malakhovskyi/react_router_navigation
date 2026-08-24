@@ -1,4 +1,4 @@
-import PageHeading from "../components/PageHeading/PageHeading";
+import PageHeading from "../components/PageHeading";
 
 export default function HomeView() {
   return (

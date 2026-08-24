@@ -1,8 +1,7 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { Outlet, Route, Routes } from "react-router";
-import AppBar from "./components/AppBar/AppBar";
-import Container from "./components/Container/Container";
+import { lazy, useEffect, useState } from "react";
+import { Route, Routes } from "react-router";
 import * as bookShelfAPI from "./services/bookshelf-api";
+import { Layout } from "./components/Layout/Layout";
 
 const HomePage = lazy(() => import("./pages/HomeView"));
 const AuthorsPage = lazy(
@@ -26,43 +25,37 @@ export default function App() {
   //! crypto.randomUUID() заміняє nanoid()
 
   return (
-    <Container>
-      <AppBar />
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
 
-      <Suspense fallback={<h1>Завантажуємось...</h1>}>
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
+        <Route path="authors" element={<AuthorsPage authors={authors} />} />
 
-            <Route path="authors" element={<AuthorsPage authors={authors} />} />
+        <Route
+          path={`authors/:id`}
+          element={<AuthorSubView authors={authors} />}
+        />
 
-            <Route
-              path={`/authors/:id`}
-              element={<AuthorSubView authors={authors} />}
-            />
+        <Route path="books" element={<BooksView />} />
 
-            <Route path="books" element={<BooksView />} />
+        <Route
+          path="books/:bookId"
+          element={<BookDetailsView authors={authors} />}
+        />
 
-            <Route
-              path="books/:bookId"
-              element={<BookDetailsView authors={authors} />}
-            />
+        <Route path="table" element={<TablePage />}>
+          <Route
+            path="info"
+            element={
+              <div>
+                <h2>Info</h2>
+              </div>
+            }
+          />
+        </Route>
 
-            <Route path="table" element={<TablePage />}>
-              <Route
-                path="info"
-                element={
-                  <div>
-                    <h2>Info</h2>
-                  </div>
-                }
-              />
-            </Route>
-
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </main>
-      </Suspense>
-    </Container>
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   );
 }

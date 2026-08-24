@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router";
-import PageHeading from "../components/PageHeading/PageHeading";
+import PageHeading from "../components/PageHeading";
 import * as bookShelfAPI from "../services/bookshelf-api";
 import { useGetAuthorByBook } from "../hooks/useGetAuthorByBook";
 

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import * as bookShelfAPI from "../services/bookshelf-api";
-import PageHeading from "../components/PageHeading/PageHeading";
+import PageHeading from "../components/PageHeading";
 import { useFetchWithAbort } from "../hooks/useFetchWithAbort";
 
 export default function BooksView() {

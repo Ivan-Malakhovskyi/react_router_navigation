@@ -6,9 +6,9 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router";
-import Table from "../components/Table/Table";
-import SortSelector from "../components/SortSelector/SortSelector";
-import PageHeading from "../components/PageHeading/PageHeading";
+import Table from "../components/Table";
+import SortSelector from "../components/SortSelector";
+import PageHeading from "../components/PageHeading";
 
 const initialState = [
   { id: 1, value: 100 },

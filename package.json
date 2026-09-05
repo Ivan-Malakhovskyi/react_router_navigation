@@ -7,11 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "mock-api": "json-server --watch db.json --port 8080"
   },
   "dependencies": {
     "axios": "^1.19.0",
     "formik": "^2.4.9",
+    "json-server": "^1.0.0-beta.15",
     "modern-normalize": "^3.0.1",
     "prop-types": "^15.8.1",
     "random-number": "^0.0.9",
